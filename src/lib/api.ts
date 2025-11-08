@@ -19,12 +19,11 @@ const cache = setupCache({
 });
 
 // Get environment variables
-// NOTE: Do NOT expose your Laravel `APP_KEY` in the frontend. If the backend requires
-// a public API key/token for requests, create a dedicated token on the backend and
-// set it as `VITE_API_KEY` in your deployment environment. The Laravel `APP_KEY`
-// is a server secret and must remain on the server.
+// NOTE: The Laravel APP_KEY should NEVER be exposed in frontend code.
+// It's a server-side encryption secret. If your backend requires a public API token,
+// create a separate token on the backend and set it as VITE_API_KEY.
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://sosa-be-main-0fch1f.laravel.cloud';
-const API_URL = import.meta.env.VITE_API_URL || `${API_BASE_URL.replace(/\/+$/,'')}/api/v1`;
+const API_URL = import.meta.env.VITE_API_URL || `${API_BASE_URL.replace(/\/+$/, '')}/api/v1`;
 const API_KEY = import.meta.env.VITE_API_KEY || '';
 
 // Create axios instance with cache adapter

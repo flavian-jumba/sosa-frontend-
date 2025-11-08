@@ -17,6 +17,7 @@ import Booking from "./pages/Booking";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import ApiTest from "./pages/ApiTest";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +39,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/api-test" element={<ApiTest />} />
             <Route path="/cottages" element={<Cottages />} />
             <Route path="/cottages/:id" element={<CottageDetail />} />
             <Route path="/restaurant" element={<Restaurant />} />
