@@ -19,9 +19,13 @@ const cache = setupCache({
 });
 
 // Get environment variables
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
-const API_KEY = import.meta.env.VITE_API_KEY || 'sosa-frontend-key-2025';
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+// NOTE: Do NOT expose your Laravel `APP_KEY` in the frontend. If the backend requires
+// a public API key/token for requests, create a dedicated token on the backend and
+// set it as `VITE_API_KEY` in your deployment environment. The Laravel `APP_KEY`
+// is a server secret and must remain on the server.
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://sosa-be-main-0fch1f.laravel.cloud';
+const API_URL = import.meta.env.VITE_API_URL || `${API_BASE_URL.replace(/\/+$/,'')}/api/v1`;
+const API_KEY = import.meta.env.VITE_API_KEY || '';
 
 // Create axios instance with cache adapter
 const api: AxiosInstance = axios.create({

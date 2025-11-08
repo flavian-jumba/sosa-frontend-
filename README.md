@@ -36,6 +36,19 @@ npm i
 npm run dev
 ```
 
+## Environment variables (backend URL / API key)
+
+This frontend reads the backend base URL and an optional public API key from Vite environment variables.
+
+Create a file named `.env` (or set these in your deployment provider) with the following values:
+
+- `VITE_API_BASE_URL` - the base URL of the Laravel backend (example: `https://sosa-be-main-0fch1f.laravel.cloud`)
+- `VITE_API_KEY` - optional public API token required by the backend for requests (NOT the Laravel `APP_KEY`).
+
+An example file is provided at `.env.example`.
+
+Important: Do NOT expose your Laravel `APP_KEY` in the frontend. `APP_KEY` is a server-side secret and should never be embedded in client code.
+
 **Edit a file directly in GitHub**
 
 - Navigate to the desired file(s).
