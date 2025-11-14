@@ -36,6 +36,50 @@ npm i
 npm run dev
 ```
 
+## Backend API Configuration
+
+This frontend connects to a Laravel backend hosted on Laravel Cloud. The API connection is configured through environment variables.
+
+### Environment Variables
+
+Create a `.env` file in the root directory (already created with default values):
+
+```env
+VITE_API_BASE_URL=https://sosa-be-main-0fch1f.laravel.cloud
+```
+
+**Important Security Note:** 
+- ⚠️ **NEVER** put your Laravel `APP_KEY` in the frontend `.env` file
+- The `APP_KEY` is a server-side encryption secret and must remain on the backend only
+- If your backend requires a public API token, create a separate token and set it as `VITE_API_KEY`
+
+### Testing the API Connection
+
+Visit `http://localhost:8081/api-test` after starting the dev server to verify the backend connection is working properly. This page will show:
+- Current API base URL configuration
+- Connection status (success/error)
+- Sample data from the backend
+
+### Deployment Configuration
+
+When deploying to production (Netlify, Vercel, etc.), set the environment variable in your hosting provider's dashboard:
+
+```
+VITE_API_BASE_URL=https://sosa-be-main-0fch1f.laravel.cloud
+```
+
+### Troubleshooting
+
+**No data showing on the frontend?**
+1. Check the backend is running: `curl https://sosa-be-main-0fch1f.laravel.cloud/api/v1/public/cottages`
+2. Visit `/api-test` route to see detailed connection status
+3. Check browser console for CORS or network errors
+4. Verify `.env` file exists and has correct `VITE_API_BASE_URL`
+
+**CORS errors?**
+- Ensure your Laravel backend has proper CORS configuration
+- The frontend domain must be allowed in backend's CORS settings
+
 ## Environment variables (backend URL / API key)
 
 This frontend reads the backend base URL and an optional public API key from Vite environment variables.

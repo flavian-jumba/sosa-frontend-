@@ -110,8 +110,16 @@ api.interceptors.response.use(
         apiError.message = 'The server encountered an error. Please try again later.';
       }
     } else if (error.request) {
-      apiError.message = 'No response from server. Please check your connection.';
-      console.error('Network error:', error);
+      // Network error - could be CORS, connection, or server down
+      const errorMsg = error.message || '';
+      
+      if (errorMsg.includes('CORS') || errorMsg.includes('Network Error')) {
+        console.error('CORS or Network error:', error);
+        apiError.message = 'Unable to connect to the server. This may be a CORS configuration issue. Please contact support.';
+      } else {
+        console.error('Network error:', error);
+        apiError.message = 'No response from server. Please check your connection.';
+      }
     } else {
       apiError.message = error.message || apiError.message;
       console.error('Request error:', error);
